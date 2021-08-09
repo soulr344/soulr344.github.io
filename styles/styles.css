@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+@import url(./responsive.css);
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --primary-foreground: #1d1d1d;
+    --primary-foreground-light: #363636;
+    --primary-background: #ffffff;
+
+    --secondary-color: hsl(266, 94%, 49%);
+    
+    --bubble-first-color: hsla(266, 94%, 49%, 0.5);
+    --bubble-second-color: hsla(266, 90%, 59%, 0.5);
+}
+
+body {
+    max-height: 100vh;
+    max-width: 100vw;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    display: flex;
+    width: 90%;
+    margin: auto;
+    height: 10vh;
+    align-items: center;
+    user-select: none;
+}
+
+i.logo::after {
+    content: "天";
+    font-size: 1.75rem;
+    margin: 0 1.2rem;
+    font-style: normal;
+    font-weight: bolder;
+}
+
+header .logo-container,
+header nav {
+    flex: 1;
+    display: flex;
+    color: var(--secondary-color);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.nav-links a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: transform 150ms linear;
+}
+
+li.selected a {
+    transform: scale(1.3);
+}
+
+.nav-links a:hover {
+    transform: scale(1.3);
+    color: var(--secondary-color);
+}
+
+.bubbles {
+    background: radial-gradient(farthest-corner at 100% 100%, var(--bubble-first-color), var(--bubble-second-color), transparent 100%);
+    border-radius: 50%;
+    height: 35vh;
+    width: 35vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    transition: 2.5s all cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.bubbles:nth-child(2) {
+    height: 25vh;
+    width: 25vh;
+}
+.bubbles:nth-child(3) {
+    height: 15vh;
+    width: 15vh;
+}
+
+section {
+    padding: 4em;
+}
+
+section.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    line-height: 1.5;
+    height: 80vh;
+}
+
+section h3 {
+    line-height: 1.5;
+    font-size: 2rem;
+    color: var(--secondary-color);
+}
+
+section span {
+    line-height: 1.5;
+    font-style: italic;
+    display: block;
+    margin: 1em 0;
+    color: var(--primary-foreground-light);
+}
+
+section .text-stuff {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    border: 4px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 2em;
+}
+
+section .text-stuff .buttons-holder {
+    display: flex;
+    justify-content: center;
+}
+
+section .icon-holder {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+section.home img {
+    height: 480px;
+    width: 480px;
+}
+
+.btn {
+    display: inline-block;
+    margin: 2em;
+    padding: .75em 1.25em;
+    border: 4px solid var(--secondary-color);
+    text-decoration: none;
+    color: var(--primary-foreground);
+    transition: 250ms all;
+    border-radius: 9px;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+    color: white;
+}
+
+section#main {
+    min-height: 100vh;
+}
+
+.scrolltotop {
+    border: 4px solid var(--secondary-color);
+    border-radius: 50%;
+    color: var(--secondary-color);
+    padding: 1em;
+    position: fixed;
+    height: 4.4rem;
+    width: 4.4rem;
+    right: 2em;
+    bottom: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    user-select: none;
+    cursor: pointer;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .1s all linear;
+}
+
+.scrolltotop:hover {
+    color: var(--primary-background);
+    background-color: var(--secondary-color);
+}
+
+footer {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+}

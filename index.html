@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Soul Reaper - Student | Programmer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
+        <link rel="stylesheet" href="./styles/styles.css" />
+        <script src="scripts/classes.js"></script>
+        <script src="scripts/script.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <div class="logo-container">
+                <div class="logo-wrap">
+                    <i class="logo"></i>
+                    Soul Reaper
+                </div>
+            </div>
+            <nav>
+                <div class="blur"></div>
+                <ul class="nav-links">
+                    <li class="selected"><a href="#">Home</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </header>
+        <main>
+            <div class="bubble-wrap">
+                <div class="bubbles" data-radii="35"></div>
+                <div class="bubbles" data-radii="25"></div>
+                <div class="bubbles" data-radii="15"></div>
+            </div>
+            <section class="home">
+                <div class="text-stuff">
+                    <h3>Hello There!</h3>
+                    <span>I'm Soul Reaper.</span>
+                    <p>
+                        I'm a senior high-school student who likes to code. And man, I love bubbles and blur!
+                    </p>
+                    <div class="buttons-holder">
+                        <a href="javascript:void(0)" class="btn" onclick="window.scroll({top: document.getElementById('main').offsetHeight, behavior: 'smooth'})">Learn More</a>
+                    </div>
+                </div>
+                <div class="icon-holder">
+                    <img src="images/home.svg" alt="logo">
+                </div>
+            </section>
+            <section id="main"></section>
+            <div class="scrolltotop">Top</div>
+        </main>
+        <footer>
+            <pre><code>&copy; 2021 - soulr344. All rights reserved.</code></pre>
+        </footer>
+    </body>
+</html>
