@@ -27,6 +27,42 @@ body {
     overflow: hidden;
 }
 
+.loading {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    background-color: var(--bg-main);
+    display: grid;
+    place-items: center;
+    color: var(--fg-main);
+    transition: 500ms opacity ease-in;
+}
+
+.loading.faded {
+    opacity: 0;
+}
+
+.loading div {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.loading p {
+    font-size: 5rem;
+    font-weight: bold;
+    animation: loading 1200ms ease-in-out infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 main {
     padding-top: 10vh;
     background-color: var(--bg-main);

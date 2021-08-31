@@ -36,6 +36,17 @@ loadJS("./scripts/components/navigation.js", () => {
     )
 });
 
+window.addEventListener('load', (event) => {
+    // if(document.readyState == "complete"){
+        let x = document.querySelector(".loading")
+        x.classList.add("faded");
+        setTimeout(() => {
+            x.remove();
+        }, 500)
+    // }
+
+});
+
 let currSection = 0,
     sections = document.querySelectorAll("section"),
     header_a = document.querySelectorAll("header a"),
