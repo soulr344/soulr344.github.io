@@ -45,7 +45,54 @@ body {
 .loading div {
     font-size: 2rem;
     text-align: center;
-    font-weight: bold;
+    font-weight: 800;
+}
+
+.loading span {
+    display: block;
+    padding: .25em 1.5em;
+    background-color: var(--fg-main-low-opacity);
+    margin-top: 1em;
+    position: relative;
+}
+
+.loading span::before,
+.loading span::after {
+    content: '';
+    position: absolute;
+    top: -25%;
+    background-color: rgba(255, 255, 0, 0.5);
+    width: 1.2rem;
+    height: 3em;
+}
+
+.loading span::before {
+    left: 1rem;
+    animation: loadingBefore 1200ms cubic-bezier(0.35, 0.65, 0.65, 0.35) infinite alternate;
+}
+
+.loading span::after {
+    background-color: rgba(153, 205, 50, 0.5);
+    animation: loadingAfter 1200ms cubic-bezier(0.35, 0.65, 0.65, 0.35) infinite alternate;
+}
+
+@keyframes loadingBefore {
+    from {
+        left: 1rem;
+    }
+    to {
+        left: calc(100% - 2rem);
+    }
+}
+
+
+@keyframes loadingAfter {
+    from {
+        right: 1rem;
+    }
+    to {
+        right: calc(100% - 2rem);
+    }
 }
 
 .loading p {

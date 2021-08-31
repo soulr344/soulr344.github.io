@@ -36,15 +36,21 @@ loadJS("./scripts/components/navigation.js", () => {
     )
 });
 
-window.addEventListener('load', (event) => {
-    // if(document.readyState == "complete"){
-        let x = document.querySelector(".loading")
-        x.classList.add("faded");
-        setTimeout(() => {
-            x.remove();
-        }, 500)
-    // }
+// const loading = document.querySelector(".loading span");
+// const loadingInterval = setInterval(()=>{
+//     if (loading.innerHTML.length == "LOADING...".length){
+//         loading.innerHTML = "LOADING.";
+//     }else{
+//         loading.innerHTML += ".";
+//     }
+// }, 1000);
 
+window.addEventListener('load', e => {
+    let x = document.querySelector(".loading")
+    x.classList.add("faded");
+    setTimeout(() => {
+        x.remove();
+    }, 600);
 });
 
 let currSection = 0,
