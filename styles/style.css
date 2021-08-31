@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('./header.css');
+@import url('./responsive.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-main: #07090F;
+    --fg-main: #FBFBFB;
+
+    --fg-main-low-opacity: #fbfbfb99;
+    --bg-main-low-opacity: #07090F99;
+
+    --nav-animation-timing: 150ms;
+
+
+    scroll-behavior: smooth;
+    scroll-padding-top: 10vh;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+main {
+    padding-top: 10vh;
+    background-color: var(--bg-main);
+    background-image: url(../images/bg.jpg);
+    background-position: 0% 0%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: difference;
+}
+
+section:focus {
+    outline: none;
+    border: none;
+}
+
+/* section "home" */
+
+section#home {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--fg-main);
+    padding-bottom: 10vh;
+    position: relative;
+}
+
+section#home.blur {
+    filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+section#home h1 {
+    font-size: 4rem;
+    margin: 2rem;
+    text-shadow: .2em .2em .3em var(--bg-main);
+    position: relative;
+}
+
+section#home p {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    text-shadow: .5em .5em .3em var(--bg-main);
+}
+
+.arrow-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 4rem;
+}
+
+.arrow-container > span {
+    display: inline-block;
+    background-color: var(--fg-main);
+    height: 4rem;
+    width: 1rem;
+    margin: 0 .56399em;
+    cursor:pointer;
+}
+
+.arrow-container > span:nth-child(1) {
+    transform: rotate(-45deg);
+}
+
+.arrow-container > span:nth-child(2) {
+    transform: rotate(45deg);
+}
+
+@keyframes fadePointer {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* section "projects" */
+
+section#projects {
+    height: 100vh;
+    background-color: var(--fg-main-low-opacity);
+    backdrop-filter: blur(.25rem);
+}
+
+/* section "contact" */
+
+section#contact {
+    min-height: 70vh;
+    color: var(--fg-main);
+    padding: 2rem;
+    background-color: var(--bg-main-low-opacity);
+    backdrop-filter: blur(.25rem);
+}
+
+section#contact h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+section#contact a {
+    font-size: 1.4rem;
+    margin-left: 2rem;
+    color: var(--fg-main);
+}
+
+section#contact ul{
+    list-style-type: none;
+}
+
+section#contact li {
+    position: relative;
+    padding: 2rem;
+    margin: 1rem;
+}
+
+section#contact li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    bottom: 0;
+    margin: auto 0;
+    width: 2rem;
+    height: 2rem;
+}
+
+section#contact li:nth-child(1)::before {
+    background: url('https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg');
+    background-size: contain;
+    filter: invert(1); /* invert the black logo into white*/
+}
+
+section#contact li:nth-child(2)::before {
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlNtMDB671kvPipwhiuhxUg9wnQmShPSwQF57JZG-5VzzDkUWkv8A36cpSuW6mZNMW5qY&usqp=CAU');
+    background-size: contain;
+}
+
+section#contact li:nth-child(3)::before {
+    background: url('https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg');
+    background-size: contain;
+}
+
+section#contact li:nth-child(4)::before {
+    background: url('https://cdn.iconscout.com/icon/free/png-256/email-2091034-1767507.png');
+    background-size: contain;
+    filter: invert(1); /* invert the black logo into white*/
+}
+
+/* BRUHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH */
+
+section#about {
+    height: 50vh;
+}

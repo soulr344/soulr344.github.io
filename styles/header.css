@@ -1,0 +1,127 @@
+header{
+    display: flex;
+    min-height: 10vh;
+    width: 100%;
+    position: fixed;
+    padding: 0 2em;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: #ffffff00;
+    transition: var(--nav-animation-timing) background-color ease-in,
+                var(--nav-animation-timing) color ease-in;
+}
+
+header > * {
+    flex: 1;
+}
+
+header ul,
+header li {
+    height: 100%;
+    width: 100%;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header ul {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+
+header li {
+    flex: 1;
+    display: grid;
+    place-items: center;
+}
+
+header a{
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: var(--fg-main);
+    padding: .75em 1.2em;
+    border-radius: 40px;
+    width: 100%;
+    text-align: center;
+    transition: var(--nav-animation-timing) color ease-in,
+                var(--nav-animation-timing) background ease-in;
+}
+
+header a:hover,
+header a.selected {
+    color: var(--bg-main);
+    background-color: var(--fg-main);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container {
+    color: var(--fg-main);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-left: 2rem;
+    white-space: nowrap;
+}
+
+.logo-container .logo {
+    font-style: normal;
+}
+
+.logo-container .logo::before {
+    content: '天';
+    font-size: 2rem;
+}
+
+.logo-container .logo::after {
+    content: 'Soul Reaper';
+    margin-left: 2em;
+}
+
+header .burger-container {
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+header .burger > span {
+    display: block;
+    background: var(--fg-main);
+    width: 36px;
+    height: 4px;
+    margin: 7px;
+    border-radius: 2px;
+    transition: var(--nav-animation-timing) background ease-in,
+                var(--nav-animation-timing) transform ease-in,
+                var(--nav-animation-timing) opacity ease-in;
+}
+
+/* White nav when the page is scrolled */
+header.white {
+    background-color: var(--fg-main);
+}
+
+header.white a {
+    color: var(--bg-main);
+}
+
+header.white a:hover,
+header.white a.selected {
+    background-color: var(--bg-main);
+    color: var(--fg-main);
+}
+
+header.white .logo-container {
+    color: var(--bg-main);
+}
+
+header.white .burger > span {
+    background: var(--bg-main);
+}
