@@ -45,13 +45,13 @@ loadJS("./scripts/components/navigation.js", () => {
 //     }
 // }, 1000);
 
-window.addEventListener('load', e => {
-    let x = document.querySelector(".loading")
-    x.classList.add("faded");
-    setTimeout(() => {
-        x.remove();
-    }, 600);
-});
+// window.addEventListener('load', e => {
+//     let x = document.querySelector(".loading")
+//     x.classList.add("faded");
+//     setTimeout(() => {
+//         x.remove();
+//     }, 600);
+// });
 
 let currSection = 0,
     sections = document.querySelectorAll("section"),
