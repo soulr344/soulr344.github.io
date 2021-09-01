@@ -94,7 +94,6 @@ const movehighlight = (moveTo, i, moveHighlight = false) => {
     } else {
         highlight.style = "width: "+ moveTo.parentElement.getBoundingClientRect().width + "px;transform: translateX(" + (i - Array.prototype.indexOf.call(moveTo.parentElement.parentElement.children, moveTo.parentElement))*100 + "%)";
     }
-    console.log(i)
 }
 
 if(s.length > 1){
