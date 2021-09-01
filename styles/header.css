@@ -34,7 +34,8 @@ header ul {
 }
 
 header li {
-    flex: 1;
+    flex: 4;
+    width: 100%;
     display: grid;
     place-items: center;
     position: relative;
@@ -45,13 +46,15 @@ header li .highlight {
     inset: 0;
     font-size: 1.1rem;
     height: calc(1.5em + .75em + .75em);
+    width: 100%;
     margin: auto;
     pointer-events: none;
     background: var(--fg-main);
     border-radius: 40px;
-    transform: translateX(100%);
+    transform: translateX(0%);
     z-index: -1;
-    transition: 200ms transform ease-in;
+    transition: 200ms transform ease-out,
+                200ms width ease-in;
 }
 
 header a{

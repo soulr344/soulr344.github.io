@@ -1,27 +1,14 @@
-(function(window){
-    'use strict';
-    const _loadJS = (src, callback) => {
-        let script = document.createElement('script');
-        script.setAttribute("src", src);
-        script.onload = callback;
-        document.head.appendChild(script);
-    }
-    if (typeof(window.loadJS) === 'undefined'){
-        window.loadJS = _loadJS;
-    }
-    window.vh = window.innerHeight / 100;
-    window.getCurrYPosition = function(){
-        return window.pageYOffset;
-    }
-    window.isElementIntersecting = function(element){
-        return (getCurrYPosition() >= element.offsetTop - element.offsetHeight / 2);
-    }
-})(window);
+/* Some constants/variable declarations */
+const sections = document.querySelectorAll("section"),
+      header_a = document.querySelectorAll("header a"),
+      s = window.location.href.split("#"),
+      arrow_pointer = document.querySelector(".arrow-container"),
+      highlight = document.querySelector('.highlight');
+let currSection = 0;
 
-let offset = 30*vh,
-    header = document.querySelector("header");
-
+/* Load the navigation bar stuff */
 loadJS("./scripts/components/navigation.js", () => {
+    const header = document.querySelector("header");
     let nav = new AnimatedNavBar([".burger", "active"], ["header nav", "active"], () => {
         document.querySelector("section#home").classList.toggle("blur");
     });
@@ -32,19 +19,17 @@ loadJS("./scripts/components/navigation.js", () => {
         () => {
             header.classList.remove("white");
         },
-        offset
+        30*vh
     )
 });
+/* Removes "selected class from all __a__ nav links" */
+const disableAllSelected = function(){
+    header_a.forEach(e => {
+        e.classList.remove("selected");
+    });
+};
 
-// const loading = document.querySelector(".loading span");
-// const loadingInterval = setInterval(()=>{
-//     if (loading.innerHTML.length == "LOADING...".length){
-//         loading.innerHTML = "LOADING.";
-//     }else{
-//         loading.innerHTML += ".";
-//     }
-// }, 1000);
-
+/* The initial loading screen fading animation */
 window.addEventListener('load', e => {
     let x = document.querySelector(".loading")
     x.classList.add("faded");
@@ -53,95 +38,107 @@ window.addEventListener('load', e => {
     }, 600);
 });
 
-let currSection = 0,
-    sections = document.querySelectorAll("section"),
-    header_a = document.querySelectorAll("header a"),
-    s = window.location.href.split("#"),
-    arrow_pointer = document.querySelector(".arrow-container"),
-    isPointerAnimationDone = false;
+/* The single page scroll effect thing */
+const page = new scrollPage({
+    parent: document.querySelector("main"),
+    sections: sections,
+    offset: 60,
+    currSection: currSection
+});
+page.handleScroll = (direction, parent, sections, currSection) => {
+    let section = sections[currSection];
+    if (section == null) return;
+    
+    section.scrollIntoView();
 
-let disableAllSelected = function(){
-    header_a.forEach(e => {
-        e.classList.remove("selected");
-    });
-};
+    disableAllSelected();
+    header_a[currSection].classList.add("selected");
+    header_a[currSection].click();
+
+    movehighlight(header_a[currSection], currSection, true);
+
+    if (section.id == "home"){
+        window.history.pushState({}, "", s[0]);
+        animatePointer(true);
+    } else {
+        animatePointer(false);
+        window.location = s[0] + "#" + sections[currSection].id;
+    }
+}
+page.addKeyboardInputHandler();
+
+/* The downwards arrow on home section animation */
+const animatePointer = (start) => {
+    if(start){
+        arrow_pointer.style = `animation: fadePointer 900ms ease-in-out infinite alternate;`;
+    } else {
+        arrow_pointer.removeAttribute("style");
+    }
+}
+/* Move to projects section on click of the arrow */
+arrow_pointer.addEventListener("click", () => {
+    page.isRunning = false;
+    page.currSection = 0;
+    page.handleScrollWrapper("up");
+});
+
+/* The navigation pill moving with hover/section change effect */
+const movehighlight = (moveTo, i, moveHighlight = false) => {
+    if(moveHighlight){
+        highlight.style = "width: "+ moveTo.parentElement.getBoundingClientRect().width + "px;transform: translateX(" + (Array.prototype.indexOf.call(moveTo.parentElement.parentElement.children, moveTo.parentElement) - parseInt(highlight.getAttribute("data-currsection")))*100 + "%)";
+        setTimeout(()=>{
+            highlight.style = "";
+            header_a[i].parentElement.appendChild(highlight);
+            highlight.setAttribute("data-currsection", i);
+        }, 200);
+    } else {
+        highlight.style = "width: "+ moveTo.parentElement.getBoundingClientRect().width + "px;transform: translateX(" + (i - Array.prototype.indexOf.call(moveTo.parentElement.parentElement.children, moveTo.parentElement))*100 + "%)";
+    }
+    console.log(i)
+}
 
 if(s.length > 1){
+    if (s[1] == "home" || s[1] == "") {
+        window.location = s[0];
+    }
     for(let i=0; i<sections.length; i++){
         let sec = sections[i];
         if (s[1] == sec.id){
             currSection = i;
             sec.scrollIntoView();
-            document.querySelector(`header a[href*=${sec.id}]`).classList.add("selected");
+            let select = document.querySelector(`header a[href*=${sec.id}]`);
+            select.classList.add("selected");
+            highlight.setAttribute("data-currsection", i);
+            movehighlight(select, i, true);
             break;
         }
     };
 } else {
     sections[0].scrollIntoView();
     header_a[0].classList.add("selected");
+    highlight.setAttribute("data-currsection", 0);
+    animatePointer(true);
 }
 
-let page = new scrollPage({
-    parent: document.querySelector("main"),
-    sections: sections,
-    offset: 60,
-    currSection: currSection
-});
-
-page.handleScroll = (direction, parent, sections, currSection) => {
-    let section = sections[currSection];
-    if (section == null) return;
-    
-    if (!isPointerAnimationDone){
-        if (section.id == "home" && !arrow_pointer.style){
-            arrow_pointer.style = `animation: fadePointer 1800ms ease-in-out infinite;`
-        } 
-        if (section.id != "home"){
-            arrow_pointer.removeAttribute("style");
-        }
-    }
-    section.scrollIntoView();
-
-    disableAllSelected();
-    header_a[currSection].classList.add("selected");
-
-    movehighlight(header_a[currSection]);
-
-    window.location = window.location.href.split("#")[0] + "#" + sections[currSection].id;
-}
-page.addKeyboardInputHandler();
-
-const highlight = document.querySelector('.highlight');
-let selected = document.querySelector(".selected");
 for(let i=0; i<header_a.length; i++){
     header_a[i].addEventListener("click", function(e){
         e.stopPropagation();
         disableAllSelected();
         this.classList.add("selected");
         page.currSection = i;
-        movehighlight(this);
-        selected = this;
+        movehighlight(this, i, true);
     });
     
     header_a[i].addEventListener("mouseenter", () => {
         if (window.innerWidth <= 768) return;
-        selected = document.querySelector(".selected");
+        const selected = header_a[highlight.getAttribute("data-currsection")];
         selected.classList.remove("selected");
-        highlight.style = "transform: translateX(" + i*100 + "%)";
+        movehighlight(selected, i)
     });
     header_a[i].addEventListener("mouseleave", ()=>{
         if (window.innerWidth <= 768) return;
+        const selected = header_a[highlight.getAttribute("data-currsection")];
         selected.classList.add("selected");
-        movehighlight(header_a[page.currSection]);
+        highlight.style = "";
     });
 }
-
-const movehighlight = (moveTo) => {
-    highlight.style = "transform: translateX(" + Array.prototype.indexOf.call(moveTo.parentElement.parentElement.children, moveTo.parentElement)*100 + "%)";
-}
-
-arrow_pointer.addEventListener("click", e => {
-    page.isRunning = false;
-    page.currSection = 0;
-    page.handleScrollWrapper("up");
-});
