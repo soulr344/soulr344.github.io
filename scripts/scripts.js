@@ -84,7 +84,7 @@ if(s.length > 1){
 let page = new scrollPage({
     parent: document.querySelector("main"),
     sections: sections,
-    offset: 80,
+    offset: 60,
     currSection: currSection
 });
 
@@ -105,16 +105,39 @@ page.handleScroll = (direction, parent, sections, currSection) => {
     disableAllSelected();
     header_a[currSection].classList.add("selected");
 
+    movehighlight(header_a[currSection]);
+
     window.location = window.location.href.split("#")[0] + "#" + sections[currSection].id;
 }
 page.addKeyboardInputHandler();
 
+const highlight = document.querySelector('.highlight');
+let selected = document.querySelector(".selected");
 for(let i=0; i<header_a.length; i++){
-    header_a[i].addEventListener("click", function(){
+    header_a[i].addEventListener("click", function(e){
+        e.stopPropagation();
         disableAllSelected();
         this.classList.add("selected");
         page.currSection = i;
+        movehighlight(this);
+        selected = this;
     });
+    
+    header_a[i].addEventListener("mouseenter", () => {
+        if (window.innerWidth <= 768) return;
+        selected = document.querySelector(".selected");
+        selected.classList.remove("selected");
+        highlight.style = "transform: translateX(" + i*100 + "%)";
+    });
+    header_a[i].addEventListener("mouseleave", ()=>{
+        if (window.innerWidth <= 768) return;
+        selected.classList.add("selected");
+        movehighlight(header_a[page.currSection]);
+    });
+}
+
+const movehighlight = (moveTo) => {
+    highlight.style = "transform: translateX(" + Array.prototype.indexOf.call(moveTo.parentElement.parentElement.children, moveTo.parentElement)*100 + "%)";
 }
 
 arrow_pointer.addEventListener("click", e => {

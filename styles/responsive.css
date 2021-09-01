@@ -15,6 +15,11 @@
         flex-direction: column;
         height: 90vh;
     }
+    header a:hover,
+    header a.selected {
+        color: var(--bg-main);
+        background-color: var(--fg-main);
+    }
 
     header .burger-container {
         display: flex;
@@ -39,5 +44,11 @@
     header.white nav {
         background: var(--fg-main);
         backdrop-filter: none;
+    }
+
+    header.white a:hover,
+    header.white a.selected {
+        background-color: var(--bg-main);
+        color: var(--fg-main);
     }
 }

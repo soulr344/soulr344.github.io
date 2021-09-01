@@ -37,6 +37,21 @@ header li {
     flex: 1;
     display: grid;
     place-items: center;
+    position: relative;
+}
+
+header li .highlight {
+    position: absolute;
+    inset: 0;
+    font-size: 1.1rem;
+    height: calc(1.5em + .75em + .75em);
+    margin: auto;
+    pointer-events: none;
+    background: var(--fg-main);
+    border-radius: 40px;
+    transform: translateX(100%);
+    z-index: -1;
+    transition: 200ms transform ease-in;
 }
 
 header a{
@@ -48,6 +63,7 @@ header a{
     border-radius: 40px;
     width: 100%;
     text-align: center;
+    line-height: 1.5;
     transition: var(--nav-animation-timing) color ease-in,
                 var(--nav-animation-timing) background ease-in;
 }
@@ -55,7 +71,6 @@ header a{
 header a:hover,
 header a.selected {
     color: var(--bg-main);
-    background-color: var(--fg-main);
 }
 
 .logo-container {
@@ -111,11 +126,13 @@ header.white {
 header.white a {
     color: var(--bg-main);
 }
-
 header.white a:hover,
 header.white a.selected {
-    background-color: var(--bg-main);
     color: var(--fg-main);
+}
+
+header.white .highlight {
+    background: var(--bg-main);
 }
 
 header.white .logo-container {
