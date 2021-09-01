@@ -84,15 +84,17 @@ arrow_pointer.addEventListener("click", () => {
 
 /* The navigation pill moving with hover/section change effect */
 const movehighlight = (moveTo, i, moveHighlight = false) => {
+    const parentRect = moveTo.parentElement.getBoundingClientRect();
     if(moveHighlight){
-        highlight.style = "width: "+ moveTo.parentElement.getBoundingClientRect().width + "px;transform: translateX(" + (Array.prototype.indexOf.call(moveTo.parentElement.parentElement.children, moveTo.parentElement) - parseInt(highlight.getAttribute("data-currsection")))*100 + "%)";
+        highlight.style = "width: "+ parentRect.width + "px;transform: translateX(" + (Array.prototype.indexOf.call(moveTo.parentElement.parentElement.children, moveTo.parentElement) - parseInt(highlight.getAttribute("data-currsection")))*100 + "%)";
         setTimeout(()=>{
             highlight.style = "";
             header_a[i].parentElement.appendChild(highlight);
             highlight.setAttribute("data-currsection", i);
         }, 200);
     } else {
-        highlight.style = "width: "+ moveTo.parentElement.getBoundingClientRect().width + "px;transform: translateX(" + (i - Array.prototype.indexOf.call(moveTo.parentElement.parentElement.children, moveTo.parentElement))*100 + "%)";
+        let translate = parentRect.left - document.querySelector(".selected").getBoundingClientRect().left;
+        highlight.style = "width: "+ parentRect.width + "px;transform: translateX(" + translate + "px)";
     }
 }
 
@@ -131,8 +133,8 @@ for(let i=0; i<header_a.length; i++){
     header_a[i].addEventListener("mouseenter", () => {
         if (window.innerWidth <= 768) return;
         const selected = header_a[highlight.getAttribute("data-currsection")];
+        movehighlight(header_a[i], i);
         selected.classList.remove("selected");
-        movehighlight(selected, i)
     });
     header_a[i].addEventListener("mouseleave", ()=>{
         if (window.innerWidth <= 768) return;

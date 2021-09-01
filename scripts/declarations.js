@@ -16,4 +16,6 @@
     window.isElementIntersecting = function(element){
         return (getCurrYPosition() >= element.offsetTop - element.offsetHeight / 2);
     }
+    // if(window.innerWidth <= 768)
+    
 })(window);
