@@ -119,6 +119,7 @@ main {
     background-size: cover;
     background-attachment: fixed;
     background-blend-mode: difference;
+    isolation: isolate;
 }
 
 section:focus {
@@ -140,7 +141,20 @@ section#home {
 
 section#home.blur {
     filter: blur(4px);
-    backdrop-filter: blur(4px);
+}
+
+div.blurred-bg {
+    inset: 0;
+    position: fixed;
+    backdrop-filter: blur(10px);
+    z-index: -1;
+    opacity: 0;
+    transition: var(--nav-animation-timing) opacity ease-in;
+    will-change: transform;
+}
+
+div.blurred-bg.blur {
+    opacity: 1;
 }
 
 section#home h1 {
@@ -195,8 +209,13 @@ section#home p {
 
 section#projects {
     height: 100vh;
+    padding: 2rem;
+    color: var(--bg-main);
     background-color: var(--fg-main-low-opacity);
-    backdrop-filter: blur(.25rem);
+}
+
+section#projects h1 {
+    font-size: 2.5rem;
 }
 
 /* section "contact" */
@@ -206,7 +225,6 @@ section#contact {
     color: var(--fg-main);
     padding: 2rem;
     background-color: var(--bg-main-low-opacity);
-    backdrop-filter: blur(.25rem);
 }
 
 section#contact h1 {

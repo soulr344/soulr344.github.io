@@ -1,14 +1,15 @@
 /* Some constants/variable declarations */
 const sections = document.querySelectorAll("section"),
+      header = document.querySelector("header"),
       header_a = document.querySelectorAll("header a"),
       s = window.location.href.split("#"),
       arrow_pointer = document.querySelector(".arrow-container"),
-      highlight = document.querySelector('.highlight');
+      highlight = document.querySelector('.highlight'),
+      blur_ov = document.querySelector("div.blurred-bg");
 let currSection = 0;
 
 /* Load the navigation bar stuff */
 loadJS("./scripts/components/navigation.js", () => {
-    const header = document.querySelector("header");
     let nav = new AnimatedNavBar([".burger", "active"], ["header nav", "active"], () => {
         document.querySelector("section#home").classList.toggle("blur");
     });
@@ -59,9 +60,11 @@ page.handleScroll = (direction, parent, sections, currSection) => {
 
     if (section.id == "home"){
         window.history.pushState({}, "", s[0]);
+        blur_ov.classList.remove("blur");
         animatePointer(true);
     } else {
         animatePointer(false);
+        blur_ov.classList.add("blur");
         window.location = s[0] + "#" + sections[currSection].id;
     }
 }
@@ -104,15 +107,17 @@ if(s.length > 1){
     }
     for(let i=0; i<sections.length; i++){
         let sec = sections[i];
-        if (s[1] == sec.id){
+        if (s[1]== sec.id){
             currSection = i;
+            page.currSection = currSection;
             sec.scrollIntoView();
             let select = document.querySelector(`header a[href*=${sec.id}]`);
             select.classList.add("selected");
             highlight.setAttribute("data-currsection", i);
             movehighlight(select, i, true);
+            blur_ov.classList.add("blur");
             break;
-        }
+        } 
     };
 } else {
     sections[0].scrollIntoView();
