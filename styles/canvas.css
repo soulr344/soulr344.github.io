@@ -1,0 +1,14 @@
+canvas#background {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--bg-main);
+    background-image: url(../images/bg.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: difference;
+    z-index: -1;
+}
