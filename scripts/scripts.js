@@ -5,7 +5,7 @@ const home = document.querySelector("section#home"),
       header_a = document.querySelectorAll("header a"),
       s = window.location.href.split("#"),
       arrow_pointer = document.querySelector(".arrow-container"),
-      highlight = document.querySelector('.highlight'),
+      highlight = document.querySelector('.highlight');
 let currSection = 0;
 
 /* Load the navigation bar stuff */
