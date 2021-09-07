@@ -6,7 +6,6 @@ const home = document.querySelector("section#home"),
       s = window.location.href.split("#"),
       arrow_pointer = document.querySelector(".arrow-container"),
       highlight = document.querySelector('.highlight'),
-      blur_ov = document.querySelector("div.blurred-bg");
 let currSection = 0;
 
 /* Load the navigation bar stuff */
@@ -69,11 +68,9 @@ page.handleScroll = (direction, parent, sections, currSection) => {
 
     if (section.id == "home"){
         window.history.pushState({}, "", s[0]);
-        blur_ov.classList.remove("blur");
         animatePointer(true);
     } else {
         animatePointer(false);
-        blur_ov.classList.add("blur");
         window.location = s[0] + "#" + sections[currSection].id;
     }
 }
@@ -124,7 +121,6 @@ if(s.length > 1){
             select.classList.add("selected");
             highlight.setAttribute("data-currsection", i);
             movehighlight(select, i, true);
-            blur_ov.classList.add("blur");
             header.classList.add("white");
             break;
         } 

@@ -114,7 +114,7 @@ body {
 main {
     padding-top: 10vh;
     background-color: var(--bg-main);
-    background-image: url(../images/bg.jpg);
+    background-image: url(../images/bg.svg);
     background-position: 0% 0%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -144,7 +144,7 @@ section#home.blur {
     filter: blur(4px);
 }
 
-div.blurred-bg {
+/* div.blurred-bg {
     inset: 0;
     position: fixed;
     backdrop-filter: blur(10px);
@@ -156,7 +156,7 @@ div.blurred-bg {
 
 div.blurred-bg.blur {
     opacity: 1;
-}
+} */
 
 section#home h1 {
     font-size: 4rem;
@@ -211,8 +211,8 @@ section#home p {
 section#projects {
     height: 100vh;
     padding: 2rem;
-    color: var(--bg-main);
-    background-color: var(--fg-main-low-opacity);
+    color: var(--fg-main);
+    background-color: var(--bg-main-low-opacity);
 }
 
 section#projects h1 {
