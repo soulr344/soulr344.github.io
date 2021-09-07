@@ -24,7 +24,7 @@ class AnimatedNavBar {
             burger.classList.toggle(burgerClass);
             panel.classList.toggle(panelClass);
 
-            if (extraStuff != null) extraStuff();
+            if (extraStuff != null) extraStuff(panel);
         });
     }
     onScroll(callbackOnScroll, callbackOnInit, offset){

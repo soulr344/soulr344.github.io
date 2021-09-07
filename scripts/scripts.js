@@ -1,5 +1,6 @@
 /* Some constants/variable declarations */
-const sections = document.querySelectorAll("section"),
+const home = document.querySelector("section#home"),
+      sections = document.querySelectorAll("section"),
       header = document.querySelector("header"),
       header_a = document.querySelectorAll("header a"),
       s = window.location.href.split("#"),
@@ -10,8 +11,16 @@ let currSection = 0;
 
 /* Load the navigation bar stuff */
 loadJS("./scripts/components/navigation.js", () => {
-    let nav = new AnimatedNavBar([".burger", "active"], ["header nav", "active"], () => {
-        document.querySelector("section#home").classList.toggle("blur");
+    let nav = new AnimatedNavBar([".burger", "active"], ["header nav", "active"], panel => {
+        home.classList.toggle("blur");
+
+        let attr = panel.getAttribute("data-toggle");
+        let toggle = (attr == "false") ? "true" : "false";
+        let animationDuration = (attr == "false") ? "(i+1)*125" : "500-i*125" ;
+        for (let i=0; i<header_a.length; i++){
+            panel.setAttribute("data-toggle", toggle);
+            header_a[i].setAttribute("style", (attr == "false") ? `animation: navLinksAnim ${eval(animationDuration)}ms ease-in forwards;` : "");
+        }
     });
     nav.onScroll(
         () => {
@@ -116,6 +125,7 @@ if(s.length > 1){
             highlight.setAttribute("data-currsection", i);
             movehighlight(select, i, true);
             blur_ov.classList.add("blur");
+            header.classList.add("white");
             break;
         } 
     };
